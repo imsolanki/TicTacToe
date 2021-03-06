@@ -1,12 +1,14 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Board {
 
+    char turn=' ';
     char[][] playingBoard;
 
     Board(){
         this.playingBoard =new char[3][3];
-
+        turn='O';
         for(int i = 0;i<playingBoard.length;i++){
             for(int j = 0;j<playingBoard[i].length;j++){
                 //System.out.print("  ");
@@ -28,6 +30,15 @@ public class Board {
     }
 
     void printBoard() {
+        //System.out.flush();
+        try{
+            Runtime.getRuntime().exec("cls");
+        }
+        catch(IOException e){
+
+        }
+
+
         System.out.println();
 
         System.out.print(this.playingBoard[0][0]);
@@ -51,10 +62,45 @@ public class Board {
         System.out.print(this.playingBoard[2][1]);
         System.out.print(" | "+this.playingBoard[2][2]);
         System.out.println();
+
     }
-    void markCell(int row,int col, char symbol){
-        this.playingBoard[row][col]=symbol;
+    void markCell(int row,int col){
+        this.playingBoard[row][col]=turn;
+        if(turn=='X'){
+            turn='O';
+        }else{
+            turn='X';
+        }
     }
+
+    boolean checkWinner(char symbol){
+
+        if(playingBoard[0][0]==symbol&&playingBoard[0][1]==symbol&&playingBoard[0][2]==symbol){
+           return true;
+        }
+        else if(playingBoard[1][0]==symbol&&playingBoard[1][1]==symbol&&playingBoard[1][2]==symbol){
+            return true;
+        }else if(playingBoard[2][0]==symbol&&playingBoard[2][1]==symbol&&playingBoard[2][2]==symbol){
+            return true;
+        }else if(playingBoard[0][0]==symbol&&playingBoard[1][0]==symbol&&playingBoard[2][0]==symbol){
+            return true;
+        }else if(playingBoard[0][1]==symbol&&playingBoard[1][1]==symbol&&playingBoard[2][1]==symbol){
+            return true;
+        }
+        else if(playingBoard[0][2]==symbol&&playingBoard[1][2]==symbol&&playingBoard[2][2]==symbol){
+            return true;
+        }
+        else if(playingBoard[0][0]==symbol&&playingBoard[1][1]==symbol&&playingBoard[2][2]==symbol){
+            return true;
+        }
+        else if(playingBoard[0][2]==symbol&&playingBoard[1][1]==symbol&&playingBoard[2][0]==symbol){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
     //void input
 
@@ -108,10 +154,19 @@ public class Board {
 
             //---------------------------------------//
             System.out.print(row+" "+ col);
-            b.markCell(row,col,'X');
+            b.markCell(row,col);
             b.printBoard();
+            if(b.checkWinner('X')){
+                System.out.println("Player X is the Winner");
+                break;
+            }
+            else if(b.checkWinner('O')){
+                System.out.println("Player O is the Winner");
+                break;
+            }
             //if()
         }
+
 
     }
 }
