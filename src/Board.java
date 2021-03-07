@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Board {
@@ -11,33 +10,26 @@ public class Board {
         turn='O';
         for(int i = 0;i<playingBoard.length;i++){
             for(int j = 0;j<playingBoard[i].length;j++){
-                //System.out.print("  ");
-                //this.playingBoard[' '][' '];
                 this.playingBoard[i][j]=' ';
             }
         }
-        //this.playingBoard=playingBoard;
-        //this.playingBoard[0][0]='X';
-        /*markCell(0,0,'X');
-        this.playingBoard[0][1]='O';
-        this.playingBoard[0][2]='X';
-        this.playingBoard[1][0]='0';
-        this.playingBoard[1][1]='X';
-        this.playingBoard[1][2]='O';
-        this.playingBoard[2][0]='O';
-        this.playingBoard[2][1]='O';
-        this.playingBoard[2][2]='X';*/
+    }
+    void markCell(int row,int col){
+        if(this.playingBoard[row][col]==' '){
+            this.playingBoard[row][col]=turn;
+            if(turn=='X'){
+                turn='O';
+            }else{
+                turn='X';
+            }
+        }
+        else{
+            System.out.println("You have already marked the cell.");
+        }
+
     }
 
     void printBoard() {
-        //System.out.flush();
-        try{
-            Runtime.getRuntime().exec("cls");
-        }
-        catch(IOException e){
-
-        }
-
 
         System.out.println();
 
@@ -49,11 +41,9 @@ public class Board {
         System.out.println();
         System.out.print("---|---|---");
         System.out.println();
-        //System.out.print(this.playingBoard[1][0]='0'+"  | ");
         System.out.print(this.playingBoard[1][0]);
         System.out.print("  | "+this.playingBoard[1][1]);
         System.out.print(" | "+this.playingBoard[1][2]+" ");
-        //System.out.print(this.playingBoard[1][2]);
         System.out.println();
         System.out.print("---|---|---");
         System.out.println();
@@ -64,16 +54,10 @@ public class Board {
         System.out.println();
 
     }
-    void markCell(int row,int col){
-        this.playingBoard[row][col]=turn;
-        if(turn=='X'){
-            turn='O';
-        }else{
-            turn='X';
-        }
-    }
+
 
     boolean checkWinner(char symbol){
+
 
         if(playingBoard[0][0]==symbol&&playingBoard[0][1]==symbol&&playingBoard[0][2]==symbol){
            return true;
@@ -101,15 +85,15 @@ public class Board {
         }
     }
 
-
-    //void input
-
     public static void main(String[] args) {
        // char[][] playingBoard = new char[3][3];
+        System.out.print("\033[H\033[2J");
         Scanner sc =new Scanner(System.in);
         Board b =new Board();
         b.printBoard();
+        int index =0;
         while(true){
+
             System.out.print("Please press a button from 1 to 9 using num pad: ");
             int button =sc.nextInt();
             int row;
@@ -151,11 +135,12 @@ public class Board {
             }else{
                 break;
             }
-
+            index=index+1;
             //---------------------------------------//
-            System.out.print(row+" "+ col);
+            //System.out.print(row+" "+ col);
             b.markCell(row,col);
             b.printBoard();
+
             if(b.checkWinner('X')){
                 System.out.println("Player X is the Winner");
                 break;
@@ -164,76 +149,15 @@ public class Board {
                 System.out.println("Player O is the Winner");
                 break;
             }
+            else if(index==9){
+                System.out.println("---------------------");
+                System.out.println("Try Again: ");
+                System.out.println("---------------------");
+                break;
+            }
             //if()
         }
 
 
     }
 }
-
-/*Task, TicTacToe make a static board.
-Create an empty Class named
-Board
-Add attributes
-Add a 2d char array of size 3x3
-Add methods
-Constructor
-Initialize 3x3 char array with hardcoded 'X', 'O' and ' ' values.
-PrintBoard
-Print all 3x3 chat array in a good format
-Ex.
- X | O |
-    | X  |O
-O | O  |
-
-
-
-
-
-for (int j = 0; j < playingBoard.length; j++) {
-                if (i == 0) {
-                    if (j == 0) {
-                        System.out.print("| "+ this.playingBoard[0][0]+" | ");
-                    } else if (j == 1) {
-                        System.out.print("O |   |");
-                    }
-                    //System.out.print(" ");
-                } else if (i == 1) {
-                    //System.out.print("  |");
-                    if (j == 1) {
-                        System.out.print("|   | X |");
-                    }
-                    else if (j == 2) {
-                        System.out.print(" O |");
-                    }
-                } else {
-                    if (j == 0) {
-                        System.out.print("| O |");
-                    }
-                    else if (j == 1) {
-                        System.out.print(" O |   |");
-                    }
-                    //System.out.print(" ");
-                }
-
-            }
-            //System.out.println();
-            //System.out.print("-------");
-            if(i==0){
-                System.out.println();
-                System.out.print("|---|---|---|");
-                System.out.println();
-                //System.out.println();
-            }
-            else if(i==1){
-                //System.out.println();
-                System.out.println();
-                System.out.print("|---|---|---|");
-                System.out.println();
-            }
-            else{
-                System.out.println();
-                System.out.print("|---|---|---|");
-            }
-        }
-*/
