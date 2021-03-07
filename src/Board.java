@@ -55,9 +55,7 @@ public class Board {
 
     }
 
-
     boolean checkWinner(char symbol){
-
 
         if(playingBoard[0][0]==symbol&&playingBoard[0][1]==symbol&&playingBoard[0][2]==symbol){
            return true;
@@ -86,11 +84,11 @@ public class Board {
     }
 
     public static void main(String[] args) {
-       // char[][] playingBoard = new char[3][3];
-        System.out.print("\033[H\033[2J");
+
         Scanner sc =new Scanner(System.in);
         Board b =new Board();
         b.printBoard();
+
         int index =0;
         while(true){
 
@@ -155,9 +153,6 @@ public class Board {
                 System.out.println("---------------------");
                 break;
             }
-            //if()
         }
-
-
     }
 }
