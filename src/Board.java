@@ -58,7 +58,7 @@ public class Board {
     boolean checkWinner(char symbol){
 
         if(playingBoard[0][0]==symbol&&playingBoard[0][1]==symbol&&playingBoard[0][2]==symbol){
-           return true;
+            return true;
         }
         else if(playingBoard[1][0]==symbol&&playingBoard[1][1]==symbol&&playingBoard[1][2]==symbol){
             return true;
@@ -91,7 +91,7 @@ public class Board {
 
         int index =0;
         while(true){
-
+            System.out.println();
             System.out.print("Please press a button from 1 to 9 using num pad: ");
             int button =sc.nextInt();
             int row;
@@ -147,12 +147,36 @@ public class Board {
                 System.out.println("Player O is the Winner");
                 break;
             }
-            else if(index==9){
+            else if(index>=9&&b.playingBoard[0][0]!=' '&&b.playingBoard[0][1]!=' '&&
+                    b.playingBoard[0][2]!=' '&&b.playingBoard[1][0]!=' '&&b.playingBoard[1][1]!=' '&&
+                    b.playingBoard[1][2]!=' '&&b.playingBoard[2][0]!=' '&&b.playingBoard[2][1]!=' '&&
+                    b.playingBoard[2][2]!=' '){
+
                 System.out.println("---------------------");
                 System.out.println("Try Again: ");
                 System.out.println("---------------------");
                 break;
+
             }
+
         }
     }
 }
+
+/*
+else if(index>=9){
+                for(int i=0;i<b.playingBoard.length;i++){
+                    for(int j =0;j<b.playingBoard[i].length;j++){
+
+                        if(b.playingBoard[i]==null){
+                            System.out.println("---------------------");
+                            System.out.println("Try Again: ");
+                            System.out.println("---------------------");
+                            break;
+                        }
+
+                    }
+                }
+
+            }
+ */
