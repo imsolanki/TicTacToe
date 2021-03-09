@@ -97,42 +97,31 @@ public class Board {
             int row;
             int col;
             //---------------------------------------//
-            if(button==7){
-                row=0;
-                col=0;
-            }
-            else if(button== 8){
-                row = 0;
-                col=1;
-            }
-            else if(button== 9){
-                row = 0;
-                col=2;
-            }
-            else if(button== 4){
-                row = 1;
-                col=0;
-            }
-            else if(button== 5){
-                row = 1;
-                col=1;
-            }
-            else if(button== 6){
-                row = 1;
-                col=2;
-            }else if(button== 1){
-                row = 2;
-                col=0;
-            }
-            else if(button== 2){
-                row = 2;
-                col=1;
-            }else if(button== 3){
-                row = 2;
-                col=2;
-            }else{
-                break;
-            }
+
+
+            //--------------------------------------//
+            //7   8   9    //  1  2   0  row 0
+            //4   5   6    //  1  2   0  row 1
+            //1   2   3    //  1  2   0  row 2
+
+            //  1  2  3  4  5  6  7  8  9  (button)
+            //  0  1  2  3  4  5  6  7  8  (button-1)
+            //  0  1  2  0  1  2  0  1  2  (button-1)%3
+
+            //--------------------------------------//
+            col = (button-1)%3;
+
+            //---------------------------------------//
+            //  1  2  3  4  5  6  7  8  9  (button)
+            //  0  1  2  3  4  5  6  7  8   (button -1)
+            //  0  0  0  1  1  1  2  2  2  (button/3)
+            //  2  2  2  1  1  1  0  0  0  (2- button)
+            //----------------------------------------//
+
+            row = button-1;
+            row =row/3;
+            row= 2-row;
+
             index=index+1;
             //---------------------------------------//
             //System.out.print(row+" "+ col);
