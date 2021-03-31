@@ -71,6 +71,7 @@ public class Board {
                 ==symbol){
             return true;
         }else{
+
             return false;
         }
     }
